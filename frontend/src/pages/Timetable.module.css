@@ -1,0 +1,149 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.addBtn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--primary);
+  color: white;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-glow);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--spacing-md);
+}
+
+.dayColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.dayHeader {
+  text-align: center;
+  padding: var(--spacing-sm);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--primary);
+}
+
+.eventCard {
+  padding: var(--spacing-md);
+  border-radius: 0.75rem;
+  font-size: 0.85rem;
+  position: relative;
+  border-left: 4px solid var(--primary);
+}
+
+.eventTime {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.eventTitle {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.deleteBtn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: var(--text-secondary);
+  opacity: 0;
+  transition: var(--transition-fast);
+}
+
+.eventCard:hover .deleteBtn {
+  opacity: 1;
+}
+
+/* Modal Styling */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  width: 100%;
+  max-width: 450px;
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.inputGroup label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.inputField {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-md);
+  border-radius: 0.75rem;
+  color: var(--text-primary);
+  outline: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+}
+
+.submitBtn {
+  background-color: var(--primary);
+  color: white;
+  padding: var(--spacing-md);
+  border-radius: 0.75rem;
+  font-weight: 700;
+  margin-top: var(--spacing-md);
+}

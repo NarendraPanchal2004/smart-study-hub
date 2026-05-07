@@ -1,0 +1,167 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.addTaskBtn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--primary);
+  color: white;
+  border-radius: 0.75rem;
+  font-weight: 600;
+}
+
+.taskStats {
+  display: flex;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.statCard {
+  flex: 1;
+  text-align: center;
+}
+
+.statValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: block;
+}
+
+.statLabel {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.taskList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.taskItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  transition: var(--transition-fast);
+}
+
+.checkbox {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.checked {
+  background-color: var(--success);
+  border-color: var(--success);
+}
+
+.taskContent {
+  flex: 1;
+}
+
+.taskTitle {
+  font-weight: 600;
+  display: block;
+}
+
+.completedText {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.taskMeta {
+  display: flex;
+  gap: var(--spacing-md);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.priority {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.high { color: var(--accent); background: rgba(244, 63, 94, 0.1); }
+.medium { color: var(--warning); background: rgba(245, 158, 11, 0.1); }
+.low { color: var(--success); background: rgba(16, 185, 129, 0.1); }
+
+.deleteBtn {
+  color: var(--text-secondary);
+  opacity: 0;
+  transition: var(--transition-fast);
+}
+
+.taskItem:hover .deleteBtn {
+  opacity: 1;
+}
+
+.deleteBtn:hover {
+  color: var(--accent);
+}
+
+/* Modal Styling */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  width: 100%;
+  max-width: 500px;
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.inputField {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-md);
+  border-radius: 0.75rem;
+  color: var(--text-primary);
+  outline: none;
+}

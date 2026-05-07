@@ -1,0 +1,139 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+}
+
+.classGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xxl);
+}
+
+.classCard {
+  padding: var(--spacing-xl);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.classCard:hover {
+  transform: translateY(-5px);
+  background: var(--surface-hover);
+  border-color: var(--primary);
+}
+
+.classNumber {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.bookGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.bookCard {
+  display: flex;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  align-items: center;
+}
+
+.bookIcon {
+  width: 60px;
+  height: 80px;
+  background: var(--primary);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+}
+
+.bookInfo {
+  flex: 1;
+}
+
+.bookTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.bookMeta {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.downloadBtn {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  width: 100%;
+  max-width: 500px;
+  padding: var(--spacing-xl);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.modalHeader h3 {
+  font-size: 1.5rem;
+}
+
+.modalHeader button {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.inputField {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-md);
+  border-radius: 0.75rem;
+  color: var(--text-primary);
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}

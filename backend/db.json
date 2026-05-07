@@ -1,0 +1,206 @@
+{
+  "users": [
+    {
+      "_id": "1778143798939",
+      "name": "Narendra",
+      "email": "narendra@example.com",
+      "password": "$2b$10$ehKdhtbrDc60lwnJrHor5.jiCbcEo/CJRT79artE7VLqyAZ3t1Usi",
+      "role": "Student",
+      "avatar": "https://ui-avatars.com/api/?name=Narendra&background=3B82F6&color=fff"
+    },
+    {
+      "_id": "1778144157206",
+      "name": "Narendra  Panchal",
+      "email": "narendra.22310311@viit.ac.in",
+      "password": "$2b$10$8f8iwFVW/Ep9aQ5M3ZPhlOcEsVPS/tLvP8xTDNqpHtiDE/IvZ1FBO",
+      "role": "Student",
+      "avatar": "https://ui-avatars.com/api/?name=Narendra%20%20Panchal&background=3B82F6&color=fff",
+      "groups": [
+        "1778147528757"
+      ]
+    },
+    {
+      "_id": "1778144530807",
+      "name": "Test User",
+      "email": "test@test.com",
+      "password": "$2b$10$1GP3tgoCyc5w4tcQmlxwi.CL7s1B2i4EIEINjVHSsUSygTi6dFOGK",
+      "role": "Student",
+      "avatar": "https://ui-avatars.com/api/?name=Test%20User&background=3B82F6&color=fff"
+    },
+    {
+      "_id": "1778147741850",
+      "name": "ATUL PANCHAL",
+      "email": "narendrapanchal8114@gmail.com",
+      "password": "$2b$10$KF1AzaRz1tv.7a8.IxqSduF7wOJYu6ZyHKsNtZFF7s.5mXZc9TPpC",
+      "role": "Student",
+      "avatar": "https://ui-avatars.com/api/?name=ATUL%20PANCHAL&background=3B82F6&color=fff",
+      "groups": [
+        "1778147528757"
+      ]
+    },
+    {
+      "_id": "1778151521351",
+      "name": "Debug User",
+      "email": "debug@example.com",
+      "password": "$2b$10$GTbx60ejt2EnM3LLF7hTMeJMOvQ1C0dNWGYM8DHIEU9wZ7w54O5J6",
+      "role": "Student",
+      "avatar": "https://ui-avatars.com/api/?name=Debug%20User&background=3B82F6&color=fff"
+    },
+    {
+      "_id": "1778152366869",
+      "name": "NP",
+      "email": "naru16p@gmail.com",
+      "password": "$2b$10$vzk5kamyt.zyNAZVtypvlOQbB.QYOm8aWDCxDybH6V/HZ8dlbTyZS",
+      "role": "Admin",
+      "avatar": "https://ui-avatars.com/api/?name=NP&background=3B82F6&color=fff",
+      "groups": [
+        "1778147528757"
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "_id": "1778147528757",
+      "name": " MHT CET",
+      "description": " ENG",
+      "code": "ZTYF49",
+      "creator": "1778144157206",
+      "members": [
+        "1778144157206",
+        "1778147741850",
+        "1778152366869"
+      ],
+      "materials": [],
+      "createdAt": "2026-05-07T09:52:08.757Z"
+    }
+  ],
+  "messages": [
+    {
+      "_id": "1778148484421",
+      "groupId": "1778147528757",
+      "senderId": "1778147741850",
+      "senderName": "ATUL PANCHAL",
+      "senderAvatar": "https://ui-avatars.com/api/?name=ATUL%20PANCHAL&background=3B82F6&color=fff",
+      "text": " hlo",
+      "type": "text",
+      "fileUrl": "",
+      "createdAt": "2026-05-07T10:08:04.421Z"
+    },
+    {
+      "_id": "1778148517056",
+      "groupId": "1778147528757",
+      "senderId": "1778144157206",
+      "senderName": "Narendra  Panchal",
+      "senderAvatar": "https://ui-avatars.com/api/?name=Narendra%20%20Panchal&background=3B82F6&color=fff",
+      "text": " hi kay chal",
+      "type": "text",
+      "fileUrl": "",
+      "createdAt": "2026-05-07T10:08:37.056Z"
+    },
+    {
+      "_id": "1778148993038",
+      "groupId": "1778147528757",
+      "senderId": "1778147741850",
+      "senderName": "ATUL PANCHAL",
+      "senderAvatar": "https://ui-avatars.com/api/?name=ATUL%20PANCHAL&background=3B82F6&color=fff",
+      "text": "Shared a file: 2as.pdf",
+      "type": "file",
+      "fileUrl": "http://localhost:5000/uploads/1778148992682-2as.pdf",
+      "createdAt": "2026-05-07T10:16:33.038Z"
+    },
+    {
+      "_id": "1778153393160",
+      "groupId": "1778147528757",
+      "senderId": "1778144157206",
+      "senderName": "Narendra  Panchal",
+      "senderAvatar": "https://ui-avatars.com/api/?name=Narendra%20%20Panchal&background=3B82F6&color=fff",
+      "text": "b",
+      "type": "text",
+      "fileUrl": "",
+      "createdAt": "2026-05-07T11:29:53.160Z"
+    }
+  ],
+  "timetables": [
+    {
+      "_id": "1778148827161",
+      "userId": "1778147741850",
+      "groupId": null,
+      "title": "jvn ",
+      "date": "2026-05-08",
+      "startTime": "17:45",
+      "endTime": "19:47",
+      "type": "study",
+      "createdAt": "2026-05-07T10:13:47.161Z"
+    },
+    {
+      "_id": "1778148969520",
+      "userId": "1778147741850",
+      "groupId": null,
+      "title": " math",
+      "date": "2026-05-07",
+      "startTime": "15:47",
+      "endTime": "18:46",
+      "type": "study",
+      "createdAt": "2026-05-07T10:16:09.520Z"
+    }
+  ],
+  "tasks": [
+    {
+      "_id": "1778149187835",
+      "userId": "1778147741850",
+      "title": " PYQ",
+      "description": " MATH 250",
+      "deadline": "2026-05-08",
+      "priority": "medium",
+      "category": "reading",
+      "completed": true,
+      "createdAt": "2026-05-07T10:19:47.835Z"
+    },
+    {
+      "_id": "1778149278826",
+      "userId": "1778147741850",
+      "title": "MATH",
+      "description": "SC",
+      "deadline": "2026-05-14",
+      "priority": "low",
+      "category": "reading",
+      "completed": true,
+      "createdAt": "2026-05-07T10:21:18.826Z"
+    }
+  ],
+  "notes": [
+    {
+      "_id": "1778149392144",
+      "userId": "1778147741850",
+      "title": "VBFGBFB",
+      "content": "ĀṀŚṢASJXASV MXSLCSUHJCD./CPMDHRHGBDFVV ",
+      "color": "#A855F7",
+      "createdAt": "2026-05-07T10:23:12.144Z",
+      "updatedAt": "2026-05-07T10:23:18.385Z"
+    }
+  ],
+  "books": [
+    {
+      "_id": "1778151823805",
+      "title": "Balbharti",
+      "category": "school",
+      "class": 10,
+      "subject": "English",
+      "board": "Maharashtra State Board",
+      "pdfUrl": "https://books.ebalbharati.in/pdfs/103030001.pdf?utm_source=chatgpt.com",
+      "addedBy": "1778147741850",
+      "createdAt": "2026-05-07T11:03:43.805Z"
+    },
+    {
+      "_id": "1778151857820",
+      "title": "Balbharti",
+      "category": "school",
+      "class": "1",
+      "subject": "English",
+      "board": "Maharashtra State Board",
+      "pdfUrl": "https://books.ebalbharati.in/pdfs/103030001.pdf?utm_source=chatgpt.com",
+      "addedBy": "1778147741850",
+      "createdAt": "2026-05-07T11:04:17.820Z"
+    }
+  ]
+}

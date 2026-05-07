@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Color Palette - Dark Mode */
+  --bg-color: #0F172A;
+  --surface-color: #1E293B;
+  --surface-hover: #334155;
+  --sidebar-bg: #1E1B4B;
+  --primary: #3B82F6;
+  --primary-glow: rgba(59, 130, 246, 0.5);
+  --secondary: #6366F1;
+  --accent: #F43F5E;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --border-color: rgba(255, 255, 255, 0.1);
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-glow: 0 0 15px var(--primary-glow);
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+body.light-mode {
+  --bg-color: #F8FAFC;
+  --surface-color: rgba(255, 255, 255, 0.8);
+  --surface-hover: rgba(255, 255, 255, 0.95);
+  --sidebar-bg: #FFFFFF;
+  --primary: #2563EB;
+  --secondary: #7C3AED;
+  --accent: #E11D48;
+  --success: #059669;
+  --warning: #D97706;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --border-color: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode {
+  --bg-color: #0F172A;
+  --surface-color: #1E293B;
+  --surface-hover: #334155;
+  --sidebar-bg: #1E1B4B;
+  --primary: #3B82F6;
+  --secondary: #6366F1;
+  --accent: #F43F5E;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Focus Mode - Hides distracting elements */
+body.focus-mode aside {
+  transform: translateX(-260px);
+  pointer-events: none;
+}
+
+body.focus-mode main, 
+body.focus-mode header,
+body.focus-mode .mainContent {
+  margin-left: 0 !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  transition: var(--transition-fast);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-hover);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Glassmorphism Utilities */
+.glass {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: var(--spacing-lg);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Animation Utilities */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* Music Visualizer Animation */
+.music-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+
+.music-bars .bar {
+  width: 3px;
+  height: 100%;
+  background-color: var(--primary);
+  border-radius: 1px;
+  animation: musicBounce 0.6s ease-in-out infinite alternate;
+}
+
+.music-bars .bar:nth-child(2) { animation-delay: 0.2s; }
+.music-bars .bar:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes musicBounce {
+  from { height: 4px; }
+  to { height: 100%; }
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.icon-btn:hover {
+  transform: scale(1.1);
+  color: var(--primary);
+}
