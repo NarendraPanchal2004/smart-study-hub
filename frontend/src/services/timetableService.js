@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/timetable';
+const API_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/timetable`;
 
 const getAuthHeader = () => {
   const user = JSON.parse(localStorage.getItem('studySyncUser'));

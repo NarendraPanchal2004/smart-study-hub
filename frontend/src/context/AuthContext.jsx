@@ -18,14 +18,14 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    const { data } = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+    const { data } = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/login`, { email, password });
     setUser(data);
     localStorage.setItem('studySyncUser', JSON.stringify(data));
     return data;
   };
 
   const register = async (name, email, password) => {
-    const { data } = await axios.post('http://localhost:5000/api/auth/register', { name, email, password });
+    const { data } = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/register`, { name, email, password });
     setUser(data);
     localStorage.setItem('studySyncUser', JSON.stringify(data));
     return data;
@@ -37,19 +37,19 @@ export const AuthProvider = ({ children }) => {
   };
 
   const getAllUsers = async () => {
-    const { data } = await axios.get('http://localhost:5000/api/auth/all', {
+    const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/all`, {
       headers: { Authorization: `Bearer ${user.token}` }
     });
     return data;
   };
 
   const forgotPassword = async (email) => {
-    const { data } = await axios.post('http://localhost:5000/api/auth/forgot-password', { email });
+    const { data } = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/forgot-password`, { email });
     return data;
   };
 
   const resetPassword = async (email, newPassword) => {
-    const { data } = await axios.post('http://localhost:5000/api/auth/reset-password', { email, newPassword });
+    const { data } = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/reset-password`, { email, newPassword });
     return data;
   };
 

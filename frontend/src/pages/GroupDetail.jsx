@@ -19,7 +19,7 @@ import { getTimetable, addEvent } from '../services/timetableService';
 import { useAuth } from '../context/AuthContext';
 import styles from './GroupDetail.module.css';
 
-const socket = io('http://localhost:5000');
+const socket = io(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}`);
 
 const GroupDetail = () => {
   const { id } = useParams();

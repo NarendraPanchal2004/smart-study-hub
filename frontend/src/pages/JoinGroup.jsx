@@ -12,7 +12,7 @@ const JoinGroup = () => {
     e.preventDefault();
     try {
       const user = JSON.parse(localStorage.getItem('studySyncUser'));
-      await axios.post('http://localhost:5000/api/groups/join', 
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/groups/join`, 
         { code }, 
         { headers: { Authorization: `Bearer ${user.token}` } }
       );
