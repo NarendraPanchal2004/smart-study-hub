@@ -1,10 +1,9 @@
-const { getDb, saveDb } = require('../mockDb');
+const Message = require('../models/Message');
 
 exports.getMessages = async (req, res) => {
   try {
     const { groupId } = req.params;
-    const db = getDb();
-    const groupMessages = db.messages.filter(m => m.groupId === groupId);
+    const groupMessages = await Message.find({ groupId }).sort({ createdAt: 1 });
     res.json(groupMessages);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -14,22 +13,16 @@ exports.getMessages = async (req, res) => {
 exports.sendMessage = async (req, res) => {
   try {
     const { groupId, text, type = 'text', fileUrl = '' } = req.body;
-    const db = getDb();
 
-    const newMessage = {
-      _id: Date.now().toString(),
+    const newMessage = await Message.create({
       groupId,
       senderId: req.user._id,
       senderName: req.user.name,
       senderAvatar: req.user.avatar,
       text,
-      type, // text, image, file
-      fileUrl,
-      createdAt: new Date()
-    };
-
-    db.messages.push(newMessage);
-    saveDb(db);
+      type,
+      fileUrl
+    });
 
     res.status(201).json(newMessage);
   } catch (error) {
@@ -40,21 +33,18 @@ exports.sendMessage = async (req, res) => {
 exports.deleteMessage = async (req, res) => {
   try {
     const { id } = req.params;
-    const db = getDb();
+    const message = await Message.findById(id);
     
-    const messageIndex = db.messages.findIndex(m => m._id === id);
-    if (messageIndex === -1) {
+    if (!message) {
       return res.status(404).json({ message: 'Message not found' });
     }
 
     // Only sender or admin can delete
-    if (db.messages[messageIndex].senderId !== req.user._id && req.user.role !== 'Admin') {
+    if (message.senderId.toString() !== req.user._id.toString() && req.user.role !== 'Admin') {
       return res.status(401).json({ message: 'Not authorized' });
     }
 
-    db.messages.splice(messageIndex, 1);
-    saveDb(db);
-
+    await message.deleteOne();
     res.json({ message: 'Message removed' });
   } catch (error) {
     res.status(500).json({ message: error.message });

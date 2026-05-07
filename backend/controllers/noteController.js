@@ -1,9 +1,8 @@
-const { getDb, saveDb } = require('../mockDb');
+const Note = require('../models/Note');
 
 exports.getNotes = async (req, res) => {
   try {
-    const db = getDb();
-    const userNotes = db.notes.filter(n => n.userId === req.user._id);
+    const userNotes = await Note.find({ userId: req.user._id }).sort({ updatedAt: -1 });
     res.json(userNotes);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -13,20 +12,13 @@ exports.getNotes = async (req, res) => {
 exports.addNote = async (req, res) => {
   try {
     const { title, content, color = '#3B82F6' } = req.body;
-    const db = getDb();
 
-    const newNote = {
-      _id: Date.now().toString(),
+    const newNote = await Note.create({
       userId: req.user._id,
       title,
       content,
-      color,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    };
-
-    db.notes.push(newNote);
-    saveDb(db);
+      color
+    });
 
     res.status(201).json(newNote);
   } catch (error) {
@@ -37,17 +29,17 @@ exports.addNote = async (req, res) => {
 exports.updateNote = async (req, res) => {
   try {
     const { id } = req.params;
-    const db = getDb();
-    
-    const index = db.notes.findIndex(n => n._id === id && n.userId === req.user._id);
-    if (index === -1) {
+    const note = await Note.findOneAndUpdate(
+      { _id: id, userId: req.user._id },
+      req.body,
+      { new: true }
+    );
+
+    if (!note) {
       return res.status(404).json({ message: 'Note not found' });
     }
 
-    db.notes[index] = { ...db.notes[index], ...req.body, updatedAt: new Date() };
-    saveDb(db);
-
-    res.json(db.notes[index]);
+    res.json(note);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -56,15 +48,11 @@ exports.updateNote = async (req, res) => {
 exports.deleteNote = async (req, res) => {
   try {
     const { id } = req.params;
-    const db = getDb();
+    const note = await Note.findOneAndDelete({ _id: id, userId: req.user._id });
     
-    const index = db.notes.findIndex(n => n._id === id && n.userId === req.user._id);
-    if (index === -1) {
+    if (!note) {
       return res.status(404).json({ message: 'Note not found' });
     }
-
-    db.notes.splice(index, 1);
-    saveDb(db);
 
     res.json({ message: 'Note deleted' });
   } catch (error) {

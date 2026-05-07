@@ -1,9 +1,9 @@
-const { getDb, saveDb } = require('../mockDb');
+const Book = require('../models/Book');
 
 exports.getBooks = async (req, res) => {
   try {
-    const db = getDb();
-    res.json(db.books);
+    const books = await Book.find({});
+    res.json(books);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -12,22 +12,16 @@ exports.getBooks = async (req, res) => {
 exports.addBook = async (req, res) => {
   try {
     const { title, category, class: bookClass, subject, board, pdfUrl } = req.body;
-    const db = getDb();
 
-    const newBook = {
-      _id: Date.now().toString(),
+    const newBook = await Book.create({
       title,
       category,
       class: bookClass,
       subject,
       board,
       pdfUrl,
-      addedBy: req.user._id,
-      createdAt: new Date()
-    };
-
-    db.books.push(newBook);
-    saveDb(db);
+      addedBy: req.user._id
+    });
 
     res.status(201).json(newBook);
   } catch (error) {

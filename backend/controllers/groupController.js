@@ -1,4 +1,4 @@
-const { getDb, saveDb } = require('../mockDb');
+const Group = require('../models/Group');
 
 // Helper to generate random 6-char code
 const generateCode = () => {
@@ -8,30 +8,15 @@ const generateCode = () => {
 exports.createGroup = async (req, res) => {
   try {
     const { name, description } = req.body;
-    const db = getDb();
-
+    
     const groupCode = generateCode();
-    const newGroup = {
-      _id: Date.now().toString(),
+    const newGroup = await Group.create({
       name,
       description,
       code: groupCode,
       creator: req.user._id,
-      members: [req.user._id],
-      materials: [],
-      createdAt: new Date()
-    };
-
-    db.groups.push(newGroup);
-    
-    // Also add group to user's list
-    const userIndex = db.users.findIndex(u => u._id === req.user._id);
-    if (userIndex !== -1) {
-      if (!db.users[userIndex].groups) db.users[userIndex].groups = [];
-      db.users[userIndex].groups.push(newGroup._id);
-    }
-
-    saveDb(db);
+      members: [req.user._id]
+    });
 
     res.status(201).json(newGroup);
   } catch (error) {
@@ -42,29 +27,18 @@ exports.createGroup = async (req, res) => {
 exports.joinGroup = async (req, res) => {
   try {
     const { code } = req.body;
-    const db = getDb();
-
-    const groupIndex = db.groups.findIndex(g => g.code === code);
-    if (groupIndex === -1) {
+    
+    const group = await Group.findOne({ code });
+    if (!group) {
       return res.status(404).json({ message: 'Group not found with this code' });
     }
 
-    const group = db.groups[groupIndex];
     if (group.members.includes(req.user._id)) {
       return res.status(400).json({ message: 'You are already a member of this group' });
     }
 
-    // Add user to group
     group.members.push(req.user._id);
-    
-    // Add group to user
-    const userIndex = db.users.findIndex(u => u._id === req.user._id);
-    if (userIndex !== -1) {
-      if (!db.users[userIndex].groups) db.users[userIndex].groups = [];
-      db.users[userIndex].groups.push(group._id);
-    }
-
-    saveDb(db);
+    await group.save();
 
     res.json(group);
   } catch (error) {
@@ -74,8 +48,7 @@ exports.joinGroup = async (req, res) => {
 
 exports.getUserGroups = async (req, res) => {
   try {
-    const db = getDb();
-    const userGroups = db.groups.filter(g => g.members.includes(req.user._id));
+    const userGroups = await Group.find({ members: req.user._id });
     res.json(userGroups);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -84,8 +57,7 @@ exports.getUserGroups = async (req, res) => {
 
 exports.getGroupDetails = async (req, res) => {
   try {
-    const db = getDb();
-    const group = db.groups.find(g => g._id === req.params.id);
+    const group = await Group.findById(req.params.id);
     
     if (!group) {
       return res.status(404).json({ message: 'Group not found' });

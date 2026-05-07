@@ -1,27 +1,26 @@
-const { getDb } = require('../mockDb');
+const Task = require('../models/Task');
+const Timetable = require('../models/Timetable');
+const Group = require('../models/Group');
+const Note = require('../models/Note');
 
 exports.getUserAnalytics = async (req, res) => {
   try {
-    const db = getDb();
     const userId = req.user._id;
 
     // 1. Task Stats
-    const userTasks = db.tasks.filter(t => t.userId === userId);
+    const userTasks = await Task.find({ userId });
     const completedTasks = userTasks.filter(t => t.completed).length;
     const pendingTasks = userTasks.length - completedTasks;
 
     // 2. Timetable Stats (Study Hours)
-    const userEvents = db.timetables.filter(t => t.userId === userId);
-    const studyEvents = userEvents.filter(e => e.type === 'study');
-    
-    // Calculate hours (mock calculation for demo)
-    const totalStudyHours = studyEvents.length * 2; // Assuming 2 hours per session for mock
+    const studyEvents = await Timetable.find({ userId, type: 'study' });
+    const totalStudyHours = studyEvents.length * 2; // Keep mock calculation logic for simplicity
 
     // 3. Group Stats
-    const userGroups = db.groups.filter(g => g.members.includes(userId));
+    const userGroups = await Group.countDocuments({ members: userId });
 
     // 4. Notes Stats
-    const userNotes = db.notes.filter(n => n.userId === userId);
+    const userNotes = await Note.countDocuments({ userId });
 
     res.json({
       tasks: {
@@ -44,8 +43,8 @@ exports.getUserAnalytics = async (req, res) => {
         ]
       },
       activity: {
-        groups: userGroups.length,
-        notes: userNotes.length
+        groups: userGroups,
+        notes: userNotes
       }
     });
   } catch (error) {
