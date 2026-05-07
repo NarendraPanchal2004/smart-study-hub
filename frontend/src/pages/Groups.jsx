@@ -121,24 +121,30 @@ const Groups = () => {
             </div>
             {error && <div className="error">{error}</div>}
             <form className={styles.form} onSubmit={handleCreateGroup}>
-              <input 
-                type="text" 
-                placeholder="Group Name" 
-                className={styles.inputField}
-                value={newGroupName}
-                onChange={(e) => setNewGroupName(e.target.value)}
-                required
-              />
-              <textarea 
-                placeholder="Description" 
-                className={styles.inputField}
-                rows="3"
-                value={newGroupDesc}
-                onChange={(e) => setNewGroupDesc(e.target.value)}
-              />
+              <div className={styles.inputGroup}>
+                <label>Group Name</label>
+                <input 
+                  type="text" 
+                  placeholder="e.g. Physics Study Circle" 
+                  className={styles.inputField}
+                  value={newGroupName}
+                  onChange={(e) => setNewGroupName(e.target.value)}
+                  required
+                />
+              </div>
+              <div className={styles.inputGroup}>
+                <label>Description</label>
+                <textarea 
+                  placeholder="What is this group about?" 
+                  className={styles.inputField}
+                  rows="3"
+                  value={newGroupDesc}
+                  onChange={(e) => setNewGroupDesc(e.target.value)}
+                />
+              </div>
               <div className={styles.modalActions}>
                 <button type="button" className={styles.cancelBtn} onClick={() => setShowCreateModal(false)}>Cancel</button>
-                <button type="submit" className={styles.submitBtn}>Create</button>
+                <button type="submit" className={styles.submitBtn}>Create Group</button>
               </div>
             </form>
           </div>
@@ -155,18 +161,21 @@ const Groups = () => {
             </div>
             {error && <div className="error">{error}</div>}
             <form className={styles.form} onSubmit={handleJoinGroup}>
-              <input 
-                type="text" 
-                placeholder="Enter 6-digit Group Code" 
-                className={styles.inputField}
-                value={joinCode}
-                onChange={(e) => setJoinCode(e.target.value)}
-                required
-                maxLength="6"
-              />
+              <div className={styles.inputGroup}>
+                <label>Invite Code</label>
+                <input 
+                  type="text" 
+                  placeholder="Enter 6-digit Code" 
+                  className={styles.inputField}
+                  value={joinCode}
+                  onChange={(e) => setJoinCode(e.target.value)}
+                  required
+                  maxLength="6"
+                />
+              </div>
               <div className={styles.modalActions}>
                 <button type="button" className={styles.cancelBtn} onClick={() => setShowJoinModal(false)}>Cancel</button>
-                <button type="submit" className={styles.submitBtn}>Join</button>
+                <button type="submit" className={styles.submitBtn}>Join Group</button>
               </div>
             </form>
           </div>
