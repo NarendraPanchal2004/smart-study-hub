@@ -18,7 +18,10 @@ const upload = multer({ storage });
 
 router.post('/', protect, upload.single('file'), (req, res) => {
   if (req.file) {
-    const fileUrl = `http://localhost:5000/uploads/${req.file.filename}`;
+    // Construct URL dynamically based on current host
+    const protocol = req.protocol;
+    const host = req.get('host');
+    const fileUrl = `${protocol}://${host}/uploads/${req.file.filename}`;
     res.json({ url: fileUrl, filename: req.file.originalname });
   } else {
     res.status(400).json({ message: 'No file uploaded' });
