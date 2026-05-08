@@ -49,7 +49,7 @@ const Signup = () => {
               <input 
                 type="text" 
                 className={styles.input} 
-                placeholder="Narendra Panchal"
+                placeholder="John Doe"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -64,7 +64,7 @@ const Signup = () => {
               <input 
                 type="email" 
                 className={styles.input} 
-                placeholder="narendra@example.com"
+                placeholder="john@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
