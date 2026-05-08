@@ -151,3 +151,18 @@
   font-weight: 700;
   margin-top: var(--spacing-md);
 }
+
+@media (max-width: 768px) {
+  .modalOverlay {
+    padding: 0;
+    align-items: stretch;
+  }
+  
+  .modal {
+    max-width: 100%;
+    min-height: 100vh;
+    border-radius: 0;
+    margin: 0;
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+}
