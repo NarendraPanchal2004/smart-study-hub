@@ -130,10 +130,10 @@
   background-color: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(8px);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   z-index: 1000;
-  padding: 20px;
+  padding: 5vh 20px;
   overflow-y: auto;
 }
 
@@ -145,10 +145,8 @@
   flex-direction: column;
   gap: var(--spacing-lg);
   animation: fadeIn 0.3s ease;
-  max-height: 90vh;
-  overflow-y: auto;
   position: relative;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .modalTitle {
