@@ -6,7 +6,7 @@ const messageSchema = new mongoose.Schema({
   senderName: { type: String, required: true },
   senderAvatar: { type: String },
   text: { type: String, required: true },
-  type: { type: String, enum: ['text', 'image', 'file'], default: 'text' },
+  type: { type: String, enum: ['text', 'image', 'file', 'call'], default: 'text' },
   fileUrl: { type: String }
 }, { timestamps: true });
 

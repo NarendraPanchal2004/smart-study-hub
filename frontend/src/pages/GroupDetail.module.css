@@ -137,6 +137,40 @@
   color: white;
 }
 
+.callBubbleContent {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: var(--spacing-md);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+}
+
+.callHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--success);
+}
+
+.joinCallBtn {
+  background: var(--success);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 4px;
+}
+
+.joinCallBtn:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
 .inputArea {
   padding: var(--spacing-md);
   background-color: var(--bg-color);

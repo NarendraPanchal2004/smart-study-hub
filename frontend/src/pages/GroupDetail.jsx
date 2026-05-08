@@ -130,6 +130,25 @@ const GroupDetail = () => {
     }
   };
 
+  const handleStartMeeting = async () => {
+    setShowMeeting(true);
+    
+    // Switch to chat tab so they see the call message
+    setActiveTab('chat');
+
+    try {
+      const messageData = {
+        groupId: id,
+        text: `started a video call`,
+        type: 'call'
+      };
+      const savedMsg = await sendMessage(messageData);
+      socket.emit('send-message', savedMsg);
+    } catch (err) {
+      console.error('Failed to send call notification', err);
+    }
+  };
+
   if (loading) return <div>Loading group...</div>;
   if (!group) return <div>Group not found</div>;
 
@@ -143,7 +162,7 @@ const GroupDetail = () => {
         <div className={styles.headerAction}>
           <button 
             className={`${styles.iconBtn} ${styles.videoBtn}`} 
-            onClick={() => setShowMeeting(true)}
+            onClick={handleStartMeeting}
             title="Start Video Meeting"
           >
             <Video />
@@ -188,6 +207,20 @@ const GroupDetail = () => {
                         msg.text
                       ) : msg.type === 'image' ? (
                         <img src={msg.fileUrl} alt="shared" style={{ maxWidth: '100%', borderRadius: '8px' }} />
+                      ) : msg.type === 'call' ? (
+                        <div className={styles.callBubbleContent}>
+                          <div className={styles.callHeader}>
+                            <Video size={16} />
+                            <strong>Video Call</strong>
+                          </div>
+                          <p style={{ margin: '8px 0', fontSize: '0.85rem' }}>{msg.text}</p>
+                          <button 
+                            className={styles.joinCallBtn} 
+                            onClick={() => setShowMeeting(true)}
+                          >
+                            Join Call
+                          </button>
+                        </div>
                       ) : (
                         <a href={msg.fileUrl} target="_blank" rel="noreferrer" style={{ color: 'inherit', display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <FileText size={20} />
