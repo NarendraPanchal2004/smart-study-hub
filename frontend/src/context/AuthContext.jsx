@@ -12,7 +12,19 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const storedUser = localStorage.getItem('studySyncUser');
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      try {
+        const parsed = JSON.parse(storedUser);
+        // MongoDB ObjectIds are 24 hex characters. If _id is missing or too short, it's a mock token!
+        if (!parsed._id || parsed._id.length !== 24) {
+          console.log("Old token detected, forcing logout");
+          localStorage.removeItem('studySyncUser');
+          setUser(null);
+        } else {
+          setUser(parsed);
+        }
+      } catch(e) {
+        localStorage.removeItem('studySyncUser');
+      }
     }
     setLoading(false);
   }, []);
