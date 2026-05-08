@@ -311,7 +311,7 @@ const GroupDetail = () => {
               </button>
             </div>
             <iframe
-              src={`https://meet.jit.si/StudySyncMeeting${group.code}#config.prejoinPageEnabled=false&config.startWithAudioMuted=true`}
+              src={`https://meet.jit.si/StudySyncMeeting${group.code}#config.prejoinPageEnabled=false&config.startWithAudioMuted=true&config.disableDeepLinking=true`}
               style={{ width: '100%', height: 'calc(100% - 60px)', border: 'none', borderRadius: '0 0 1rem 1rem' }}
               allow="camera; microphone; display-capture; fullscreen; clipboard-read; clipboard-write; speaker-selection"
             ></iframe>
