@@ -1,3 +1,9 @@
+// Polyfill for Node 18 compatibility with MongoDB driver
+const crypto = require('crypto');
+if (!global.crypto) {
+  global.crypto = crypto.webcrypto;
+}
+
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
