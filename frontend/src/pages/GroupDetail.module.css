@@ -307,3 +307,14 @@
   font-weight: 600;
   font-size: 0.85rem;
 }
+
+@media (max-width: 768px) {
+  .meetingOverlay {
+    padding: 0;
+  }
+  
+  .meetingContainer {
+    border-radius: 0;
+    border: none;
+  }
+}
