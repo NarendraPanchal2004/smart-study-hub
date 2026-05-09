@@ -206,9 +206,6 @@ const GroupDetail = () => {
             <div className={styles.messageList} ref={scrollRef}>
               {messages.map((msg) => (
                 <div key={msg._id} className={`${styles.message} ${msg.senderId === user._id ? styles.myMessage : ''}`}>
-                  {msg.senderId !== user._id && (
-                    <img src={msg.senderAvatar} alt="" className={styles.avatar} />
-                  )}
                   <div className={styles.msgContent}>
                     {msg.senderId !== user._id && (
                       <span className={styles.senderName}>{msg.senderName}</span>
