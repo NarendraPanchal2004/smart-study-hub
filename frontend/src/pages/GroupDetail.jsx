@@ -206,9 +206,13 @@ const GroupDetail = () => {
             <div className={styles.messageList} ref={scrollRef}>
               {messages.map((msg) => (
                 <div key={msg._id} className={`${styles.message} ${msg.senderId === user._id ? styles.myMessage : ''}`}>
-                  <img src={msg.senderAvatar} alt="" className={styles.avatar} />
+                  {msg.senderId !== user._id && (
+                    <img src={msg.senderAvatar} alt="" className={styles.avatar} />
+                  )}
                   <div className={styles.msgContent}>
-                    <span className={styles.senderName}>{msg.senderName}</span>
+                    {msg.senderId !== user._id && (
+                      <span className={styles.senderName}>{msg.senderName}</span>
+                    )}
                     <div className={`${styles.bubble} ${msg.senderId === user._id ? styles.myBubble : ''}`}>
                       {msg.type === 'text' && msg.text.startsWith('[CALL_START]') ? (
                         <div className={styles.callBubbleContent}>
