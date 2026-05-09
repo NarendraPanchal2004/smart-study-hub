@@ -1,10 +1,12 @@
 import { Search, Bell, Settings, LogOut, Flame, Menu } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useNotifications } from '../../context/NotificationContext';
 import styles from './Header.module.css';
 
 const Header = ({ toggleSidebar }) => {
   const { user, logout } = useAuth();
+  const { unreadCount } = useNotifications();
   const navigate = useNavigate();
 
   return (
@@ -30,7 +32,7 @@ const Header = ({ toggleSidebar }) => {
       <div className={styles.actions}>
         <Link to="/notifications" className={styles.iconBtn}>
           <Bell size={20} />
-          <span className={styles.notificationBadge}></span>
+          {unreadCount > 0 && <span className={styles.notificationBadge}>{unreadCount}</span>}
         </Link>
         
         <Link to="/settings" className={styles.iconBtn}>

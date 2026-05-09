@@ -17,6 +17,7 @@ import { getMessages, sendMessage, uploadFile, deleteMessage } from '../services
 import { getTasks, addTask, updateTask } from '../services/taskService';
 import { getTimetable, addEvent } from '../services/timetableService';
 import { useAuth } from '../context/AuthContext';
+import { useNotifications } from '../context/NotificationContext';
 import styles from './GroupDetail.module.css';
 
 const socket = io(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}`);
@@ -25,6 +26,7 @@ const GroupDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { sendNotification } = useNotifications();
   const [group, setGroup] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
@@ -63,6 +65,12 @@ const GroupDetail = () => {
     socket.on('receive-message', (message) => {
       if (message.groupId === id) {
         setMessages(prev => [...prev, message]);
+        if (message.senderId !== user._id && document.hidden) {
+          sendNotification(`New message in group`, {
+            body: `${message.senderName}: ${message.text}`,
+            tag: 'new-message'
+          });
+        }
       }
     });
 
@@ -72,6 +80,16 @@ const GroupDetail = () => {
 
     socket.on('incoming-call', ({ senderName }) => {
       if (senderName !== user.name) {
+        // Play notification sound
+        const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3');
+        audio.play().catch(e => console.log("Audio play failed", e));
+
+        sendNotification('Incoming Video Call!', {
+          body: `${senderName} is starting a video call.`,
+          tag: 'video-call',
+          requireInteraction: true
+        });
+
         alert(`${senderName} is starting a video call! Click OK to see the join button in chat.`);
         setActiveTab('chat');
       }

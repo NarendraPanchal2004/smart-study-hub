@@ -48,6 +48,24 @@
   color: var(--accent);
 }
 
+.notificationBadge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  min-width: 16px;
+  height: 16px;
+  background-color: var(--accent);
+  color: white;
+  border-radius: 10px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  border: 2px solid var(--bg-color);
+}
+
 .actions {
   display: flex;
   align-items: center;
