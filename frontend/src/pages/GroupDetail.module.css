@@ -99,6 +99,27 @@
   flex-direction: column;
 }
 
+@media (max-width: 768px) {
+  .avatar {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .senderName {
+    font-size: 0.7rem;
+  }
+  
+  .message {
+    max-width: 90%;
+    gap: var(--spacing-sm);
+  }
+
+  .bubble {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+}
+
 /* Chat Styles */
 .chatContainer {
   flex: 1;

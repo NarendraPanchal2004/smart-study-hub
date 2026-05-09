@@ -48,6 +48,40 @@
   color: var(--accent);
 }
 
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.iconBtn {
+  background: transparent;
+  color: var(--text-secondary);
+  padding: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+}
+
+.userName {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
 @media (max-width: 1024px) {
   .searchContainer {
     width: 200px;
@@ -59,15 +93,21 @@
     display: block;
   }
   
-  .searchContainer, .streakBadge, .userRole {
-    display: none;
+  .searchContainer, .streakBadge, .userName {
+    display: none; /* Hide name on mobile to save space */
+  }
+
+  .avatar {
+    width: 32px; /* Smaller avatar on mobile */
+    height: 32px;
   }
   
   .header {
+    height: 60px;
     padding: 0 var(--spacing-md);
   }
   
   .actions {
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
   }
 }
