@@ -1,14 +1,21 @@
 .header {
-  height: 80px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--spacing-xl);
+  padding: 0 var(--spacing-lg);
   background-color: var(--bg-color);
   border-bottom: 1px solid var(--border-color);
   position: sticky;
   top: 0;
   z-index: 90;
+}
+
+.menuBtn {
+  display: none;
+  background: transparent;
+  color: var(--text-primary);
+  padding: var(--spacing-xs);
 }
 
 .searchContainer {
@@ -18,91 +25,49 @@
   border: 1px solid var(--border-color);
   border-radius: 0.75rem;
   padding: 0 var(--spacing-md);
-  width: 400px;
+  width: 300px;
   transition: var(--transition-fast);
 }
 
-.searchContainer:focus-within {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 2px var(--primary-glow);
-}
-
-.searchInput {
-  background: transparent;
-  border: none;
-  color: var(--text-primary);
-  padding: var(--spacing-sm) var(--spacing-md);
-  width: 100%;
-  outline: none;
-  font-size: 0.9rem;
-}
-
-.actions {
+.streakBadge {
   display: flex;
   align-items: center;
-  gap: var(--spacing-lg);
+  gap: 8px;
+  background: rgba(245, 158, 11, 0.1);
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(245, 158, 11, 0.2);
 }
 
-.iconBtn {
+.logoutBtn {
   background: transparent;
   color: var(--text-secondary);
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-xs);
-  border-radius: 0.5rem;
 }
 
-.iconBtn:hover {
-  color: var(--text-primary);
-  background-color: var(--surface-color);
+.logoutBtn:hover {
+  color: var(--accent);
 }
 
-.notificationBadge {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 8px;
-  height: 8px;
-  background-color: var(--accent);
-  border-radius: 50%;
-  border: 2px solid var(--bg-color);
+@media (max-width: 1024px) {
+  .searchContainer {
+    width: 200px;
+  }
 }
 
-.profile {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  cursor: pointer;
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: 0.75rem;
-  transition: var(--transition-fast);
-}
-
-.profile:hover {
-  background-color: var(--surface-color);
-}
-
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--primary);
-}
-
-.profileInfo {
-  display: flex;
-  flex-direction: column;
-}
-
-.userName {
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.userRole {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
+@media (max-width: 768px) {
+  .menuBtn {
+    display: block;
+  }
+  
+  .searchContainer, .streakBadge, .userRole {
+    display: none;
+  }
+  
+  .header {
+    padding: 0 var(--spacing-md);
+  }
+  
+  .actions {
+    gap: var(--spacing-md);
+  }
 }

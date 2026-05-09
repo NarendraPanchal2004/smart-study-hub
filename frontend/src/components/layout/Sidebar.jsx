@@ -16,7 +16,7 @@ import { useAuth } from '../../context/AuthContext';
 import PomodoroTimer from './PomodoroTimer';
 import styles from './Sidebar.module.css';
 
-  const Sidebar = () => {
+const Sidebar = ({ isOpen, toggleSidebar }) => {
   const { logout, user } = useAuth();
   const navItems = [
     { icon: <LayoutDashboard size={20} />, label: 'Dashboard', path: '/' },
@@ -33,7 +33,7 @@ import styles from './Sidebar.module.css';
   }
 
   return (
-    <aside className={styles.sidebar}>
+    <aside className={`${styles.sidebar} ${isOpen ? styles.sidebarOpen : ''}`}>
       <div className={styles.logoContainer}>
         <Zap className={styles.logoIcon} size={28} fill="currentColor" />
         <span className={styles.logoText}>StudySync</span>
@@ -44,6 +44,7 @@ import styles from './Sidebar.module.css';
           <NavLink 
             key={item.label} 
             to={item.path}
+            onClick={() => { if (window.innerWidth <= 768) toggleSidebar(); }}
             className={({ isActive }) => 
               `${styles.navItem} ${isActive ? styles.activeNavItem : ''}`
             }
@@ -57,7 +58,7 @@ import styles from './Sidebar.module.css';
       <div className={styles.footer}>
         <PomodoroTimer />
         
-        <NavLink to="/join" className={styles.joinBtn}>
+        <NavLink to="/join" className={styles.joinBtn} onClick={() => { if (window.innerWidth <= 768) toggleSidebar(); }}>
           Join a Group
         </NavLink>
         

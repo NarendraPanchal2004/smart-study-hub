@@ -8,6 +8,7 @@
   margin-left: 260px; /* Width of sidebar */
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .pageContainer {
@@ -15,4 +16,25 @@
   flex: 1;
   background-color: var(--bg-color);
   overflow-y: auto;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 95;
+  backdrop-filter: blur(4px);
+}
+
+@media (max-width: 768px) {
+  .mainContent {
+    margin-left: 0;
+  }
+  
+  .pageContainer {
+    padding: var(--spacing-md);
+  }
 }
