@@ -242,7 +242,16 @@ const GroupDetail = () => {
               ))}
             </div>
             <form className={styles.inputArea} onSubmit={handleSendMessage}>
-              <button type="button" className={styles.iconBtn} onClick={() => fileInputRef.current.click()}>
+              <button 
+                type="button" 
+                className={styles.iconBtn} 
+                onClick={handleStartMeeting}
+                title="Start Video Call"
+                style={{ color: 'var(--success)' }}
+              >
+                <Video size={22} />
+              </button>
+              <button type="button" className={styles.iconBtn} onClick={() => fileInputRef.current.click()} title="Attach File">
                 <Paperclip size={22} />
               </button>
               <input 
