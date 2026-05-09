@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Book, Download, Search, ChevronRight, Library as LibraryIcon, Plus, X } from 'lucide-react';
-import { getBooks, addBook } from '../services/libraryService';
+import { getBooks, addBook, uploadLibraryFile } from '../services/libraryService';
 import { useAuth } from '../context/AuthContext';
 import styles from './Library.module.css';
 
@@ -18,6 +18,7 @@ const Library = () => {
     board: 'Maharashtra State Board',
     pdfUrl: '#'
   });
+  const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     fetchBooks();
@@ -34,13 +35,30 @@ const Library = () => {
 
   const handleAddBook = async (e) => {
     e.preventDefault();
+    if (isUploading) return;
     try {
       await addBook(newBook);
       fetchBooks();
       setIsModalOpen(false);
-      setNewBook({ ...newBook, title: '', subject: '' });
+      setNewBook({ ...newBook, title: '', subject: '', pdfUrl: '#' });
     } catch (err) {
       console.error('Failed to add book', err);
+    }
+  };
+
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    setIsUploading(true);
+    try {
+      const { url } = await uploadLibraryFile(file);
+      setNewBook({ ...newBook, pdfUrl: url });
+    } catch (err) {
+      console.error('File upload failed', err);
+      alert('Failed to upload file');
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -205,15 +223,26 @@ const Library = () => {
                 />
               </div>
               <div className="inputGroup">
-                <label>PDF URL / Link</label>
+                <label>Upload PDF / Excel File</label>
+                <input 
+                  type="file"
+                  accept=".pdf,.xlsx,.xls,.doc,.docx"
+                  className={styles.inputField}
+                  onChange={handleFileUpload}
+                  style={{ padding: '8px' }}
+                />
+              </div>
+              <div style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '0.8rem' }}>OR</div>
+              <div className="inputGroup">
+                <label>Paste PDF URL / Link</label>
                 <input 
                   className={styles.inputField} 
                   value={newBook.pdfUrl}
                   onChange={e => setNewBook({...newBook, pdfUrl: e.target.value})}
                 />
               </div>
-              <button type="submit" className="glass" style={{ background: 'var(--primary)', color: 'white', padding: '12px', borderRadius: '10px', marginTop: '10px', fontWeight: 700 }}>
-                Upload to Library
+              <button type="submit" disabled={isUploading} className="glass" style={{ background: 'var(--primary)', color: 'white', padding: '12px', borderRadius: '10px', marginTop: '10px', fontWeight: 700, opacity: isUploading ? 0.7 : 1 }}>
+                {isUploading ? 'Uploading File...' : 'Upload to Library'}
               </button>
             </form>
           </div>
