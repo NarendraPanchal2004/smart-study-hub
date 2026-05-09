@@ -65,8 +65,17 @@ export const AuthProvider = ({ children }) => {
     return data;
   };
 
+  const updateProfile = async (profileData) => {
+    const { data } = await axios.put(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/profile`, profileData, {
+      headers: { Authorization: `Bearer ${user.token}` }
+    });
+    setUser(data);
+    localStorage.setItem('studySyncUser', JSON.stringify(data));
+    return data;
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, getAllUsers, forgotPassword, resetPassword, loading }}>
+    <AuthContext.Provider value={{ user, login, register, logout, getAllUsers, forgotPassword, resetPassword, updateProfile, loading }}>
       {children}
     </AuthContext.Provider>
   );

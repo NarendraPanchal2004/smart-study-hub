@@ -4,17 +4,32 @@ import { useAuth } from '../context/AuthContext';
 import styles from './Profile.module.css';
 
 const Profile = () => {
-  const { user } = useAuth();
+  const { user, updateProfile } = useAuth();
   const [formData, setFormData] = useState({
     name: user?.name || '',
     email: user?.email || '',
-    bio: 'Computer Engineering Student | Aspiring Developer',
+    bio: user?.bio || '',
+    institution: user?.institution || '',
     role: user?.role || 'Student'
   });
+  const [isSaving, setIsSaving] = useState(false);
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
-    alert('Profile updated successfully! (Demo mode)');
+    setIsSaving(true);
+    try {
+      await updateProfile({
+        name: formData.name,
+        bio: formData.bio,
+        institution: formData.institution
+      });
+      alert('Profile updated successfully!');
+    } catch (err) {
+      console.error('Failed to update profile', err);
+      alert('Failed to update profile');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -68,7 +83,8 @@ const Profile = () => {
             <input 
               type="text" 
               className={styles.inputField} 
-              defaultValue="VIIT, Pune"
+              value={formData.institution}
+              onChange={(e) => setFormData({...formData, institution: e.target.value})}
             />
           </div>
           <div className={`${styles.inputGroup} styles.fullWidth`}>
@@ -80,9 +96,9 @@ const Profile = () => {
               onChange={(e) => setFormData({...formData, bio: e.target.value})}
             />
           </div>
-          <button type="submit" className={`${styles.saveBtn} ${styles.fullWidth}`}>
+          <button type="submit" disabled={isSaving} className={`${styles.saveBtn} ${styles.fullWidth}`} style={{ opacity: isSaving ? 0.7 : 1 }}>
             <Save size={20} />
-            <span>Save Profile Changes</span>
+            <span>{isSaving ? 'Saving...' : 'Save Profile Changes'}</span>
           </button>
         </form>
       </div>
