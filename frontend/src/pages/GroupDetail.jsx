@@ -70,11 +70,19 @@ const GroupDetail = () => {
       setMessages(prev => prev.filter(m => m._id !== msgId));
     });
 
+    socket.on('incoming-call', ({ senderName }) => {
+      if (senderName !== user.name) {
+        alert(`${senderName} is starting a video call! Click OK to see the join button in chat.`);
+        setActiveTab('chat');
+      }
+    });
+
     return () => {
       socket.off('receive-message');
       socket.off('message-deleted');
+      socket.off('incoming-call');
     };
-  }, [id]);
+  }, [id, user.name]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -132,18 +140,17 @@ const GroupDetail = () => {
 
   const handleStartMeeting = async () => {
     setShowMeeting(true);
-    
-    // Switch to chat tab so they see the call message
     setActiveTab('chat');
 
     try {
       const messageData = {
         groupId: id,
-        text: `started a video call`,
-        type: 'call'
+        text: `[CALL_START] started a video call`,
+        type: 'text' // Using 'text' to ensure backend saves it even if enum is old
       };
       const savedMsg = await sendMessage(messageData);
       socket.emit('send-message', savedMsg);
+      socket.emit('call-started', { groupId: id, senderName: user.name });
     } catch (err) {
       console.error('Failed to send call notification', err);
     }
@@ -203,17 +210,13 @@ const GroupDetail = () => {
                   <div className={styles.msgContent}>
                     <span className={styles.senderName}>{msg.senderName}</span>
                     <div className={`${styles.bubble} ${msg.senderId === user._id ? styles.myBubble : ''}`}>
-                      {msg.type === 'text' ? (
-                        msg.text
-                      ) : msg.type === 'image' ? (
-                        <img src={msg.fileUrl} alt="shared" style={{ maxWidth: '100%', borderRadius: '8px' }} />
-                      ) : msg.type === 'call' ? (
+                      {msg.type === 'text' && msg.text.startsWith('[CALL_START]') ? (
                         <div className={styles.callBubbleContent}>
                           <div className={styles.callHeader}>
                             <Video size={16} />
                             <strong>Video Call</strong>
                           </div>
-                          <p style={{ margin: '8px 0', fontSize: '0.85rem' }}>{msg.text}</p>
+                          <p style={{ margin: '8px 0', fontSize: '0.85rem' }}>{msg.text.replace('[CALL_START]', '')}</p>
                           <button 
                             className={styles.joinCallBtn} 
                             onClick={() => setShowMeeting(true)}
@@ -221,6 +224,10 @@ const GroupDetail = () => {
                             Join Call
                           </button>
                         </div>
+                      ) : msg.type === 'text' ? (
+                        msg.text
+                      ) : msg.type === 'image' ? (
+                        <img src={msg.fileUrl} alt="shared" style={{ maxWidth: '100%', borderRadius: '8px' }} />
                       ) : (
                         <a href={msg.fileUrl} target="_blank" rel="noreferrer" style={{ color: 'inherit', display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <FileText size={20} />

@@ -77,6 +77,11 @@ io.on('connection', (socket) => {
     io.to(data.groupId).emit('message-deleted', data.id);
   });
 
+  socket.on('call-started', (data) => {
+    // data contains { groupId, senderName }
+    socket.to(data.groupId).emit('incoming-call', data);
+  });
+
   socket.on('disconnect', () => {
     console.log('User disconnected:', socket.id);
   });
