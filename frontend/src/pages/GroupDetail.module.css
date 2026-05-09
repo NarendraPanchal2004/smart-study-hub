@@ -101,22 +101,24 @@
 
 @media (max-width: 768px) {
   .avatar {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
   }
   
   .senderName {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
+    margin-bottom: 1px;
   }
   
   .message {
-    max-width: 90%;
-    gap: var(--spacing-sm);
+    max-width: 92%;
+    gap: 8px;
   }
 
   .bubble {
-    font-size: 0.85rem;
-    padding: 8px 12px;
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    border-radius: 12px;
   }
 }
 
